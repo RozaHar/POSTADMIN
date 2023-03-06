@@ -1,7 +1,9 @@
+const { json } = require("express");
 const {
   addAdminPosts,
   getAllAdminPosts,
   updateAdminPost,
+  destroyAdminPost,
 } = require("../models/admin.posts.models");
 
 async function getAll(req, res) {
@@ -38,4 +40,16 @@ async function updatePost(req, res) {
   return res.status(200).json(post);
 }
 
-module.exports = { newAdminPost, getAll, updatePost };
+async function deleteAdminPost(req, res) {
+  const id = req.params.id;
+  if (!id) {
+    res.status(404).json({
+      error: "not admin post id",
+    });
+  }
+
+  await destroyAdminPost(id);
+  return res.status(200).json({ success: "deleted admin post" });
+}
+
+module.exports = { newAdminPost, getAll, updatePost, deleteAdminPost };
