@@ -4,6 +4,7 @@ const {
   getAllAdminPosts,
   updateAdminPost,
   destroyAdminPost,
+  getById,
 } = require("../models/admin.posts.models");
 
 async function getAll(req, res) {
@@ -52,4 +53,10 @@ async function deleteAdminPost(req, res) {
   return res.status(200).json({ success: "deleted admin post" });
 }
 
-module.exports = { newAdminPost, getAll, updatePost, deleteAdminPost };
+async function ById(req, res) {
+  const id = req.params.id;
+  const adminPOst = await getById(id);
+  return res.status(200).json(adminPOst);
+}
+
+module.exports = { newAdminPost, getAll, updatePost, deleteAdminPost, ById };

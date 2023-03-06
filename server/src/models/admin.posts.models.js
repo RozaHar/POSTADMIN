@@ -44,9 +44,14 @@ async function destroyAdminPost(id) {
   return await adminPosts.findByIdAndDelete({ _id: id });
 }
 
+async function getById(id) {
+  return await adminPosts.findById({ _id: id });
+}
+
 module.exports = {
   addAdminPosts,
   getAllAdminPosts,
   updateAdminPost,
   destroyAdminPost,
+  getById,
 };
