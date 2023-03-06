@@ -2,7 +2,7 @@ const adminPosts = require("./admin.posts.mongo");
 const lastPostId = 0;
 
 async function getAllAdminPosts() {
-  return await adminPosts.find({}, { __v: 0 });
+  return await adminPosts.find({}, { __v: 0 }).sort("-postId");
 }
 async function saveAdminPost(post) {
   return await adminPosts.updateOne(
@@ -40,4 +40,13 @@ async function updateAdminPost(id, post) {
   saveAdminPost(updatePOST);
 }
 
-module.exports = { addAdminPosts, getAllAdminPosts, updateAdminPost };
+async function destroyAdminPost(id) {
+  return await adminPosts.findByIdAndDelete({ _id: id });
+}
+
+module.exports = {
+  addAdminPosts,
+  getAllAdminPosts,
+  updateAdminPost,
+  destroyAdminPost,
+};
