@@ -7,7 +7,7 @@ const server = http.createServer(app);
 const PORT = process.env.PORT || 4000;
 const Mongo_Url = process.env.MONGO_URL_PASSWORD;
 mongoose.connection.once("open", () => {
-  console.log(`Mongoose conect your work`);
+  console.log(`Mongoose connect your work`);
 });
 
 mongoose.connection.on("error", () => {
